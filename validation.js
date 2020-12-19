@@ -20,9 +20,6 @@ const regValidation = (data) => {
 
 const loginValidation = (data) => {
     const schema = Joi.object({ 
-        name: Joi.string() 
-        .min(1) 
-        .required(),
         email: Joi.string() 
         .min(5) 
         .required() 
