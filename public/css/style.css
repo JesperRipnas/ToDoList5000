@@ -1,0 +1,43 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    }
+body {
+    background-color: rgb(30, 30, 30);
+  }
+  * {box-sizing: border-box}
+
+.container {
+    position: relative;
+    margin: 0 auto;
+    width: 50%;
+    height: 500px;
+    border-radius: 5px;
+    background-color: #3b3b3b;
+    padding: 20px 0 30px 0;
+    color: white;
+}
+
+.row {
+    width: 50%;
+    margin: 0 auto;
+}
+    
+input[type=submit] {
+    background-color: #ec0000;
+    color: white;
+    width: 200px;
+    cursor: pointer;
+    margin-left: 80px;
+
+}
+  
+input[type=submit]:hover {
+    background-color: #363636;
+}
+    
+.hide-md-lg {
+    display: none;
+}
+  
