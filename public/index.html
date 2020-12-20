@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+  <meta charset="utf-8">
+    <title>ToDoList5000 | Login</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+
 </head>
-<body>
-    <div class="container">
-        <form action="/action_page.php">
-          <div class="row">
-            <h2 style="text-align:center">Login</h2>   
-              <input type="text" name="username" placeholder="Username" required>
-              <input type="password" name="password" placeholder="Password" required>
-              <input type="submit" value="Login">
-            </div>
-          </div>
-        </form>
-      </div>
-</body>
-</html>
+    <div id="login">
+      <form name='form-login'>
+        <span class="fontawesome-user"></span>
+          <input type="text" id="user" placeholder="Email" value="demo@rippan.se">
+       
+        <span class="fontawesome-lock"></span>
+          <input type="password" id="pass" placeholder="Password" value="demo">
+        
+        <input type="submit" id="submit_btn" value="Login">
+        <p><a href="signup">Create new account</a> 
+        <br>
+        <a href="reset">Reset password</a</p>
+</form>

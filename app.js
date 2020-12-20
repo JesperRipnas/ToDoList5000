@@ -26,6 +26,14 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/signup.html'));
+});
+
+app.get('/reset', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/reset.html'));
+});
+
 app.get('/dashboard', verify, (req, res) => {
     res.send('Hallo');
 });
@@ -34,5 +42,5 @@ app.use('/api/user', authRoute);
 app.use('*', postRoute);
 
 // Host server at port 8080
-app.listen(8080, () => console.log('Server running'));
+app.listen(8080, () => console.log('Server running at http://localhost:8080'));
 
