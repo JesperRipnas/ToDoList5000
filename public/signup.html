@@ -1,21 +1,60 @@
 <html lang="en-US">
 <head>
   <meta charset="utf-8">
-    <title>ToDoList5000 | Sign up</title>
+    <title>ToDoList5000 | Signup</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
-
 </head>
-    <div id="login">
-      <form name='form-signup'>
-        <span class="fontawesome-user"></span>
-          <input type="text" id="user" placeholder="Email" value="">
-       
-        <span class="fontawesome-lock"></span>
-          <input type="password" id="pass" placeholder="Password" value="">
+<body>
+  <div id="login">
+    <form id="signupForm" action="#" method="post">
+      <span class="fontawesome-user"></span>
+      <input type="text" id="name" name="name" placeholder="Name" value="">
 
-          <span class="fontawesome-lock"></span>
-          <input type="password" id="confirmpass" placeholder="Confirm password" value="">
+      <span class="fontawesome-user"></span>
+      <input type="text" id="email" name="email" placeholder="Email" value="">
+     
+      <span class="fontawesome-lock"></span>
+      <input type="password" id="password" name="password" placeholder="Password" value="">
+      
+      <input type="submit" value="Sign up" class="btn btn-primary btn-block" />
+      </form>
+      </div>
+      <center><pre id="output">JSON</pre></center>
+
+<script>
+        (function() {
+	      function toJSONString( form ) {
+        var xhr = new XMLHttpRequest();
+        var url = "/api/user/register";
+		    var obj = {};
+        var elements = form.querySelectorAll( "input" );
         
-        <input type="submit" value="Sign up">
-</form>
+		    for( var i = 0; i < elements.length; ++i ) {
+			    var element = elements[i];
+			    var name = element.name;
+          var value = element.value;
+		  	  if( name ) {
+				    obj[ name ] = value;
+		  	  };
+        };
+    var xmlhttp = new XMLHttpRequest();
+    var theUrl = "/api/user/register";
+    xmlhttp.open("POST", theUrl);
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.send(JSON.stringify( obj ));
+		return JSON.stringify( obj );
+	}
+	document.addEventListener( "DOMContentLoaded", function() {
+		var form = document.getElementById( "signupForm" );
+		var output = document.getElementById( "output" );
+		form.addEventListener( "submit", function( e ) {
+			e.preventDefault();
+			var json = toJSONString( this );
+			output.innerHTML = json;
+		}, false);
+	});
+})();
+</script>
+</body>
+</html>

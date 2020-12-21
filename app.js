@@ -15,7 +15,7 @@ const postRoute = require('./routes/posts');
 
 // Connect to DB
 mongoose.connect(
-    process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('Connected to db')
+    process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('Server: Connected to database')
 );
 
 // Middleware
@@ -23,24 +23,27 @@ app.use(express.json());
 
 // Route Middlewares
 app.get('/', (req, res) => {
+    console.log('Server: /index')
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 app.get('/signup', (req, res) => {
+    console.log('Server: /signup')
     res.sendFile(path.join(__dirname + '/public/signup.html'));
 });
 
 app.get('/reset', (req, res) => {
+    console.log('Server: /reset')
     res.sendFile(path.join(__dirname + '/public/reset.html'));
 });
 
 app.get('/dashboard', verify, (req, res) => {
-    res.send('Hallo');
+    console.log('Server: /dashboard')
 });
 
 app.use('/api/user', authRoute);
 app.use('*', postRoute);
 
 // Host server at port 8080
-app.listen(8080, () => console.log('Server running at http://localhost:8080'));
+app.listen(8080, () => console.log('Server: Running at http://localhost:8080'));
 
