@@ -7,10 +7,10 @@ const regValidation = (data) => {
         name: Joi.string() 
         .min(1) 
         .required(),
-        email: Joi.string() 
+        email: Joi.string()
+        .email({ tlds: { allow: false } })
         .min(1) 
-        .required() 
-        .email(),
+        .required(),
         password: Joi.string() 
         .min(1) 
         .required() 

@@ -8,13 +8,14 @@
 <body>
   <div id="login">
     <form id="loginform" action="#" method="post">
+      <center><h1><p id="msg"></p></h1></center>
       <span class="fontawesome-user"></span>
       <input type="text" id="email" name="email" placeholder="Email" value="demo@rippan.se">
      
       <span class="fontawesome-lock"></span>
       <input type="password" id="password" name="password" placeholder="Password" value="demo">
       
-      <input type="submit" value="Send" class="btn btn-primary btn-block" />
+      <input type="submit" value="Sign in" class="btn btn-primary btn-block" />
 
       <p><a href="signup">Create new account</a> 
       <br>
@@ -44,8 +45,8 @@
     xmlhttp.open("POST", theUrl);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify( obj ));
-		return JSON.stringify( obj );
-	}
+    return JSON.stringify( obj );
+	};
 	document.addEventListener( "DOMContentLoaded", function() {
 		var form = document.getElementById( "loginform" );
 		var output = document.getElementById( "output" );

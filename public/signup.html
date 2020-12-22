@@ -8,21 +8,48 @@
 <body>
   <div id="login">
     <form id="signupForm" action="#" method="post">
-      <span class="fontawesome-user"></span>
+      <center><h1><p id="msg"></p></h1></center>
+      <span class="fontawesome-user" id="fontUser"></span>
       <input type="text" id="name" name="name" placeholder="Name" value="">
 
-      <span class="fontawesome-user"></span>
+      <span class="fontawesome-user" id="fontUserTwo"></span>
       <input type="text" id="email" name="email" placeholder="Email" value="">
      
-      <span class="fontawesome-lock"></span>
+      <span class="fontawesome-lock" id="fontLock"></span>
       <input type="password" id="password" name="password" placeholder="Password" value="">
       
-      <input type="submit" value="Sign up" class="btn btn-primary btn-block" />
+      <input type="submit" value="Sign up" class="btn btn-primary btn-block" id="sumbitBtn">
+      <br>
+      <br>
+      <input type="return" value="Go Back" class="btn btn-primary btn-block" onclick="pageRedirect()" />
       </form>
       </div>
       <center><pre id="output">JSON</pre></center>
 
 <script>
+        function removeForm() {
+          var sumbitBtn = document.getElementById('sumbitBtn');
+          var fontUser = document.getElementById('fontUser');
+          var fontUserTwo = document.getElementById('fontUserTwo');
+          var fontLock = document.getElementById('fontLock');
+          var formName = document.getElementById('name');
+          var formPassword = document.getElementById('password');
+          var formEmail = document.getElementById('email');
+
+          sumbitBtn.parentNode.removeChild(sumbitBtn);
+          formName.parentNode.removeChild(formName);
+          formPassword.parentNode.removeChild(formPassword);
+          formEmail.parentNode.removeChild(formEmail);
+          fontUser.parentNode.removeChild(fontUser);
+          fontUserTwo.parentNode.removeChild(fontUserTwo);
+          fontLock.parentNode.removeChild(fontLock);
+          document.getElementById("msg").innerHTML = "Account created!";
+        };
+
+        function pageRedirect() {
+        window.location.replace("/");
+        };
+
         (function() {
 	      function toJSONString( form ) {
         var xhr = new XMLHttpRequest();
@@ -43,7 +70,7 @@
     xmlhttp.open("POST", theUrl);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify( obj ));
-		return JSON.stringify( obj );
+    return JSON.stringify( obj );
 	}
 	document.addEventListener( "DOMContentLoaded", function() {
 		var form = document.getElementById( "signupForm" );
@@ -51,7 +78,8 @@
 		form.addEventListener( "submit", function( e ) {
 			e.preventDefault();
 			var json = toJSONString( this );
-			output.innerHTML = json;
+      output.innerHTML = json;
+      removeForm()
 		}, false);
 	});
 })();
