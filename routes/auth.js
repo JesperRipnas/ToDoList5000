@@ -69,5 +69,10 @@ router.post('/lists', async (req, res) => {
         res.redirect('/dashboard');
     }
 });
+router.get('/lists', (req, res) => {
+    TodoTask.find({}, (err, tasks) => {
+        res.json(tasks);
+    });
+});
 
 module.exports = router;

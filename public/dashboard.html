@@ -4,6 +4,7 @@
     <title>ToDoList5000 | Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
   <div id="login">
@@ -13,13 +14,14 @@
     <br>
     <br>
     <input type="logout" value="Logout" id="logout" onclick="removeCookiesAndLogout()" />
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     </form>
+  </div>
+  <div id="list">
+    <table>
+      <tr>
+        <h2><div id="dblist"></div></h2>
+      </tr>
+    </table>
   </div>
 
 <script>
@@ -43,6 +45,7 @@
     xmlhttp.open("POST", theUrl);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify( obj ));
+    pageRedirect();
     return JSON.stringify( obj );
 	};
 	document.addEventListener( "DOMContentLoaded", function() {
@@ -55,10 +58,41 @@
 	});
 })();
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function pageRedirect() {
+  sleep(100).then(() => { window.location.replace("/dashboard"); });
+};
+
+// Fetch data from database to display lists
+fetch('/api/user/lists')
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    appendData(data);
+  })
+  .catch(function (err) {
+    console.log(err);
+  });
+
+// Loop the list and write each list item from the API to the HTML page
+function appendData(data) {
+  var mainContainer = document.getElementById("dblist");
+  data.reverse(); // Reverse array so the newest shows on top
+  for (var i = 0; i < data.length; i++) {
+    var div = document.createElement("div");
+    div.innerHTML = data[i].content;
+    mainContainer.appendChild(div);
+  }
+}
+
+// Call for API to logout user and disable cookie stored in browser
 function removeCookiesAndLogout() {
   window.location.replace("/api/user/logout");
 };
 </script>
-
 </body>
 </html>

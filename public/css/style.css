@@ -33,6 +33,17 @@ after { clear: both; }
   width: 320px;
 }
 
+#list {
+  margin: auto;
+  padding: 22px 22px 22px 22px;
+  text-align: center;
+  width: 50%;
+  border-radius: 5px;
+  background: #282e33;
+  border-top: 3px solid #434a52;
+  border-bottom: 3px solid #434a52;
+}
+
 #login form {
   margin: auto;
   padding: 22px 22px 22px 22px;
@@ -42,7 +53,6 @@ after { clear: both; }
   border-top: 3px solid #434a52;
   border-bottom: 3px solid #434a52;
 }
-
 
 #login form input[type="text"] {
   background-color: #3b4148;
