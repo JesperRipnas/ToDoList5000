@@ -1,5 +1,6 @@
 const router = require ('express').Router();
 const User = require('../model/User');
+const TodoTask = require('../model/Todo');
 const jwt = require('jsonwebtoken');
 const { regValidation, loginValidation } = require('../validation');
 const bcrypt = require('bcryptjs');
@@ -56,5 +57,17 @@ router.post('/login', async (req, res) => {
         res.cookie('authorization', token).send(token);
         console.log('Auth: Token sent');
     });
+
+router.post('/lists', async (req, res) => {
+    const todoTask = new TodoTask({
+        content: req.body.content
+    });
+    try {
+        await todoTask.save(); 
+        res.redirect('/dashboard');
+    } catch {
+        res.redirect('/dashboard');
+    }
+});
 
 module.exports = router;

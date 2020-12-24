@@ -23,6 +23,7 @@ mongoose.connect(
 );
 
 // Middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
 app.use(express.json());
 app.use(cookieParser())
@@ -72,16 +73,16 @@ function verifyToken(req, res, next) {
         jwt.verify(tokenCookie, key, (err) => {
             if(err) {
                 // Forbidden
-                res.sendStatus(403);
-                console.log('Server: 403: Access forbidden!!');
+                console.log('Server: 403 Access denied');
+                return res.status(403).redirect('/');
             }
             loggedIn = true;
             return next();
         });
     } else {
         // Forbidden
-        res.sendStatus(403);
-        console.log('Server: 403: Access forbidden');
+        console.log('Server: 403 Access denied');
+        return res.status(403).redirect('/');
     }
 };
 

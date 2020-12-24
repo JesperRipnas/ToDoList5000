@@ -7,20 +7,57 @@
 </head>
 <body>
   <div id="login">
-    <form name='form-add-activity'>
-    <input type="text" id="activity" placeholder="add activity..." value="">
+    <form id="form-add-activity" action="#" method="POST">
+    <input type="text" name="content" placeholder="add activity...">
     <input type="submit" value="Add">
     <br>
     <br>
     <input type="logout" value="Logout" id="logout" onclick="removeCookiesAndLogout()" />
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     </form>
   </div>
 
 <script>
-    function removeCookiesAndLogout() {
-    
-    window.location.replace("/api/user/logout");
-    };
+    (function() {
+	      function toJSONString( form ) {
+        var xhr = new XMLHttpRequest();
+        var url = "/api/user/lists";
+		    var obj = {};
+        var elements = form.querySelectorAll( "input" );
+        
+		    for( var i = 0; i < elements.length; ++i ) {
+			    var element = elements[i];
+			    var name = element.name;
+          var value = element.value;
+		  	  if( name ) {
+				    obj[ name ] = value;
+		  	  };
+        };
+    var xmlhttp = new XMLHttpRequest();
+    var theUrl = "/api/user/lists";
+    xmlhttp.open("POST", theUrl);
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.send(JSON.stringify( obj ));
+    return JSON.stringify( obj );
+	};
+	document.addEventListener( "DOMContentLoaded", function() {
+		var form = document.getElementById( "form-add-activity" );
+		var output = document.getElementById( "output" );
+		form.addEventListener( "submit", function( e ) {
+			e.preventDefault();
+			var json = toJSONString( this );
+    }, false);
+	});
+})();
+
+function removeCookiesAndLogout() {
+  window.location.replace("/api/user/logout");
+};
 </script>
 
 </body>
