@@ -3,6 +3,9 @@ const User = require('../model/User');
 const jwt = require('jsonwebtoken');
 const { regValidation, loginValidation } = require('../validation');
 const bcrypt = require('bcryptjs');
+const cookieParser = require('cookie-parser')
+
+router.use(cookieParser())
 
 router.post('/register', async (req, res) => {
 
@@ -39,15 +42,18 @@ router.post('/login', async (req, res) => {
         // CHECK IF EMAIL EXISTS
         const user = await User.findOne({ email: req.body.email});
         if (!user) {
-        return res.status(400).send('Email does not exist');
+            return res.status(400).send('Email does not exist');
         };
         // CHECK PASSWORD
         const password = await bcrypt.compare(req.body.password, user.password);
-        if (!password) return res.status(400).send('Invalid password');
-
+        if (!password) {
+            return res.status(400).send('Invalid password');
+        };
         // GENERATE LOGIN TOKEN
         const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-        res.header('auth-token', token).send(token);
+        //res.header('authorization', token).send(token);
+        res.header('authorization', token).send(token);
         console.log('Auth: Token sent');
     });
+
 module.exports = router;
