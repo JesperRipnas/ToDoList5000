@@ -24,7 +24,6 @@
       <input type="return" value="Go Back" class="btn btn-primary btn-block" onclick="pageRedirect()" />
       </form>
       </div>
-      <center><pre id="output">JSON</pre></center>
 
 <script>
         function removeForm() {
@@ -78,7 +77,6 @@
 		form.addEventListener( "submit", function( e ) {
 			e.preventDefault();
 			var json = toJSONString( this );
-      output.innerHTML = json;
       removeForm()
 		}, false);
 	});

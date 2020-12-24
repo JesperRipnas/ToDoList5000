@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
 const cors = require('cors');
 
+var loggedIn = false;
+
 dotenv.config();
 // Load static files in the public/css & js folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -14,9 +16,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Import Routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
-const { userInfo } = require('os');
-const { JsonWebTokenError } = require('jsonwebtoken');
-const { emitWarning } = require('process');
 
 // Connect to DB
 mongoose.connect(
@@ -30,7 +29,7 @@ app.use(cookieParser())
 
 // Route Middlewares
 app.get('/', (req, res) => {
-    console.log('Server: /index');
+    console.log('Server: /');
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
@@ -57,8 +56,8 @@ app.post('/api/posts', verifyToken, (req, res) => {
 });
 
 // ROUTES
+app.use('/api/user/logout', removeCookie);
 app.use('/api/user', authRoute);
-app.use('/api/posts', postRoute);
 app.all('*', function(req, res) {
     res.redirect('/')
 });
@@ -67,14 +66,16 @@ app.all('*', function(req, res) {
 function verifyToken(req, res, next) {
     
     // Check if token is undefined or not
-    if (typeof req.headers.authorization !== 'undefined') {
-        let token = req.headers.authorization.split(' ')[1];
-        let key = process.env.TOKEN_SECRET;
-
-        jwt.verify(token, key, (err, user) => {
-            if (err) {
-                res.status(403);
+    let tokenCookie = req.cookies['authorization'];
+    let key = process.env.TOKEN_SECRET; 
+    if(tokenCookie !== null){
+        jwt.verify(tokenCookie, key, (err) => {
+            if(err) {
+                // Forbidden
+                res.sendStatus(403);
+                console.log('Server: 403: Access forbidden!!');
             }
+            loggedIn = true;
             return next();
         });
     } else {
@@ -84,10 +85,12 @@ function verifyToken(req, res, next) {
     }
 };
 
-// Create HttpOnly cookies
-const createCookie = () => {
-    cookie
-}
+function removeCookie(req, res) {
+    res.clearCookie('authorization', { path: '/' })
+    loggedIn = false;
+    res.redirect('/');
+    console.log('Auth: Token removed');
+};
 
 // Host server at port 8080
 app.listen(8080, () => console.log('Server: Running at http://localhost:8080'));

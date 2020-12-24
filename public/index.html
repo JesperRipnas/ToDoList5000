@@ -15,14 +15,13 @@
       <span class="fontawesome-lock"></span>
       <input type="password" id="password" name="password" placeholder="Password" value="demo">
       
-      <input type="submit" value="Sign in" class="btn btn-primary btn-block" />
+      <input type="submit" value="Sign in" class="btn btn-primary btn-block" onclick="pageRedirect()" />
 
       <p><a href="signup">Create new account</a> 
       <br>
       <a href="reset">Reset password</a></p>
       </form>
       </div>
-      <center><pre id="output">JSON</pre></center>
 
 <script>
         (function() {
@@ -53,10 +52,18 @@
 		form.addEventListener( "submit", function( e ) {
 			e.preventDefault();
 			var json = toJSONString( this );
-			output.innerHTML = json;
-		}, false);
+    }, false);
 	});
 })();
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function pageRedirect() {
+  sleep(500).then(() => { window.location.replace("/dashboard"); });
+};
+
 </script>
 </body>
 </html>

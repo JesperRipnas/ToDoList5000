@@ -10,13 +10,18 @@
     <form name='form-add-activity'>
     <input type="text" id="activity" placeholder="add activity..." value="">
     <input type="submit" value="Add">
+    <br>
+    <br>
+    <input type="logout" value="Logout" id="logout" onclick="removeCookiesAndLogout()" />
     </form>
   </div>
 
-  <script>
-      function pageRedirect() {
-      window.location.replace("/");
-      };
-  </script>
+<script>
+    function removeCookiesAndLogout() {
+    
+    window.location.replace("/api/user/logout");
+    };
+</script>
+
 </body>
 </html>

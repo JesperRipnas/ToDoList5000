@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { regValidation, loginValidation } = require('../validation');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser')
+const path = require('path');
 
 router.use(cookieParser())
 
@@ -37,6 +38,7 @@ router.post('/register', async (req, res) => {
 
 // LOGIN
 router.post('/login', async (req, res) => {
+    var loggedIn = false;
     const {error} = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
         // CHECK IF EMAIL EXISTS
@@ -51,8 +53,7 @@ router.post('/login', async (req, res) => {
         };
         // GENERATE LOGIN TOKEN
         const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-        //res.header('authorization', token).send(token);
-        res.header('authorization', token).send(token);
+        res.cookie('authorization', token).send(token);
         console.log('Auth: Token sent');
     });
 
