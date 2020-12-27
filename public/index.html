@@ -4,11 +4,12 @@
     <title>ToDoList5000 | Login</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
   <div id="login">
     <form id="loginform" action="#" method="post">
-      <center><h1><p id="msg">TodoList 5000</p></h1></center>
+      <center><h2><p>ToDoList 5000</p></h2></center>
       <span class="fontawesome-user"></span>
       <input type="text" id="email" name="email" placeholder="Email" value="demo@rippan.se">
      
@@ -22,6 +23,7 @@
       <a href="reset">Reset password</a></p>
       </form>
       </div>
+      <div id="errorLogin"></div>
 
 <script>
         (function() {
@@ -55,15 +57,6 @@
     }, false);
 	});
 })();
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function pageRedirect() {
-  sleep(500).then(() => { window.location.replace("/dashboard"); });
-};
-
 </script>
 </body>
 </html>

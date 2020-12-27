@@ -4,11 +4,12 @@
     <title>ToDoList5000 | Signup</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
   <div id="login">
     <form id="signupForm" action="#" method="post">
-      <center><h1><p id="msg"></p></h1></center>
+      <div id='msg'></div>
       <span class="fontawesome-user" id="fontUser"></span>
       <input type="text" id="name" name="name" placeholder="Name" value="">
 
@@ -21,7 +22,7 @@
       <input type="submit" value="Sign up" class="btn btn-primary btn-block" id="sumbitBtn">
       <br>
       <br>
-      <input type="return" value="Go back" class="btn btn-primary btn-block" onclick="pageRedirect()" />
+      <input type="return" value="Go back" class="btn btn-primary btn-block" onclick="RedirectToIndex()" />
       </form>
       </div>
 
@@ -43,10 +44,6 @@
           fontUserTwo.parentNode.removeChild(fontUserTwo);
           fontLock.parentNode.removeChild(fontLock);
           document.getElementById("msg").innerHTML = "Account created!";
-        };
-
-        function pageRedirect() {
-        window.location.replace("/");
         };
 
         (function() {

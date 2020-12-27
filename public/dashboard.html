@@ -4,7 +4,7 @@
     <title>ToDoList5000 | Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body>
   <div id="login">
@@ -17,13 +17,8 @@
     </form>
   </div>
   <div id="list">
-    <table>
-      <tr>
-        <h2><div id="dblist"></div></h2>
-      </tr>
-    </table>
+    <h2><div id="dblist"></div></h2>
   </div>
-
 <script>
     (function() {
 	      function toJSONString( form ) {
@@ -32,7 +27,7 @@
 		    var obj = {};
         var elements = form.querySelectorAll( "input" );
         
-		    for( var i = 0; i < elements.length; ++i ) {
+		    for(var i = 0; i < elements.length; ++i ) {
 			    var element = elements[i];
 			    var name = element.name;
           var value = element.value;
@@ -58,14 +53,6 @@
 	});
 })();
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function pageRedirect() {
-  sleep(100).then(() => { window.location.replace("/dashboard"); });
-};
-
 // Fetch data from database to display lists
 fetch('/api/user/lists')
   .then(function (response) {
@@ -81,13 +68,16 @@ fetch('/api/user/lists')
 // Loop the list and write each list item from the API to the HTML page
 function appendData(data) {
   var mainContainer = document.getElementById("dblist");
+  var listDate = document.getElementById("dblistDate");
   data.reverse(); // Reverse array so the newest shows on top
   for (var i = 0; i < data.length; i++) {
     var div = document.createElement("div");
-    div.innerHTML = data[i].content;
+    div.innerHTML = '<div class="todo-list-item-name">' + data[i].content + '</div>' + ' <a href="/api/user/lists/delete/' + data[i]._id + '">' + 'delete' + '</a>' + '<br>' + '<br>';
     mainContainer.appendChild(div);
   }
-}
+};
+
+data[i].content
 
 // Call for API to logout user and disable cookie stored in browser
 function removeCookiesAndLogout() {

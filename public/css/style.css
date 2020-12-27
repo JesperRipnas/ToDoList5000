@@ -28,6 +28,14 @@ p {
 
 after { clear: both; }
 
+#errorLogin {
+  font-size: large;
+  text-align: center;
+  margin: 0 auto;
+  width: 320px;
+  padding-left: 10px;
+}
+
 #login {
   margin: 50px auto;
   width: 320px;
@@ -147,3 +155,4 @@ a:hover {
     color: #7f5200;
     text-decoration: none;
 }
+
