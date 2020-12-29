@@ -1,30 +1,13 @@
 TODOLIST 5000
 
-Projekt: ToDo List 5000
 
-
-Syfte: 
-
-
-Att skapa en hemsida med enkel inloggning och möjlighet att
-
+Syfte: Att skapa en hemsida med enkel inloggning och möjlighet att
 skapa, radera och organisera listor och uppgifter. Uppgifter ska ha olika
-
 status faser som kan ändras under tidens gång.
 
-Hantering: 
+Hantering: Lagrar data i form av skapade listor, inloggningsuppgifter och kategori.
 
-
-Lagrar data i form av skapade listor, inloggningsuppgifter
-
-och kategori.
-
-Funktionalitet
-
-
-
-Prioritet: 
-
+Funktionalitet:
 
 (a) Leverera en produkt där användare kan logga in med korrekta inloggningsuppgifter.
 
@@ -52,10 +35,7 @@ e) Utöka säkerhet och “scaling” genom att implementera
 en enklare databas för hantering av användare uppgift
 
 
-
-
-
-
+WORK IN PROGRESS
 
 BACKEND 
 
