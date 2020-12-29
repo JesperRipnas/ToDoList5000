@@ -16,9 +16,15 @@
     <input type="logout" value="Logout" id="logout" onclick="removeCookiesAndLogout()" />
     </form>
   </div>
-  <div id="list">
+  <br>
+  <div id="completedLists">
+    <h1>New tasks</h1>
     <h2><div id="dblist"></div></h2>
-  </div>
+    <br>
+    <br>
+    <h1>Completed tasks</h1>
+    <h2><div id="dblist_2"></div></h2>
+    </div>
 <script>
     (function() {
 	      function toJSONString( form ) {
@@ -68,16 +74,23 @@ fetch('/api/user/lists')
 // Loop the list and write each list item from the API to the HTML page
 function appendData(data) {
   var mainContainer = document.getElementById("dblist");
-  var listDate = document.getElementById("dblistDate");
+  var CompletedContainer = document.getElementById("dblist_2");
   data.reverse(); // Reverse array so the newest shows on top
   for (var i = 0; i < data.length; i++) {
+    // IF THE BOOLEAN VALUE FOR THE LIST IS FALSE
+    if (data[i].completed == false) {
     var div = document.createElement("div");
-    div.innerHTML = '<div class="todo-list-item-name">' + data[i].content + '</div>' + ' <a href="/api/user/lists/delete/' + data[i]._id + '">' + 'delete' + '</a>' + '<br>' + '<br>';
+    div.innerHTML = '<div id="list">' + data[i].content + '<p>' + ' <a href="/api/user/lists/complete=' + data[i]._id + '" title="Complete">' + '<img border ="0"' + 'alt="Complete"' + 'src="img/complete.png"' + 'width="30px"' + 'height="33px">' + '</a>' + ' <a href="/api/user/lists/delete=' + data[i]._id + '" title="Delete">' + '<img border ="0"' + 'alt="Delete"' + 'src="img/trashcan.png"' + 'width="35px"' + 'height="34px">' + '</a>' + '</div>';
     mainContainer.appendChild(div);
+    }
+    // IF THE BOOLEAN BALUE FOR THE LIST IS TRUE
+    else {
+    var div = document.createElement("div");
+    div.innerHTML = '<div id="list">' + data[i].content + '<p>' + ' <a href="/api/user/lists/setnew=' + data[i]._id + '" title="Set to new">' + '<img border ="0"' + 'alt="New"' + 'src="img/new.png"' + 'width="30px"' + 'height="33px">' + '</a>' + ' <a href="/api/user/lists/delete=' + data[i]._id + '" title="Delete">' + '<img border ="0"' + 'alt="Delete"' + 'src="img/trashcan.png"' + 'width="35px"' + 'height="34px">' + '</a>' + '</div>';
+      CompletedContainer.appendChild(div);
+    }
   }
 };
-
-data[i].content
 
 // Call for API to logout user and disable cookie stored in browser
 function removeCookiesAndLogout() {

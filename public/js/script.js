@@ -1,6 +1,9 @@
 var loginError = document.getElementById('errorLogin');
 var signUpError = document.getElementById('errorSignUp');
-loginError.innerHTML = 'Email or password was incorrect!';
+
+if (!email == false || !password == false) {
+    loginError.innerHTML = '';
+};
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

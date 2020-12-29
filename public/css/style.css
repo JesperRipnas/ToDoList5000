@@ -38,22 +38,42 @@ after { clear: both; }
 
 #login {
   margin: 50px auto;
-  width: 320px;
+  margin-bottom: 0px;
+  width: 400px;
 }
 
 #list {
+  padding-top: 30px;
   margin: auto;
-  padding: 22px 22px 22px 22px;
+  margin-top: 1px;
   text-align: center;
-  width: 50%;
+  width: 407px;
   border-radius: 5px;
   background: #282e33;
   border-top: 3px solid #434a52;
   border-bottom: 3px solid #434a52;
 }
 
+#completedLists {
+  text-align: center;
+  margin: 0 auto;
+}
+
+#dblist {
+  margin: 0 auto;
+  background-color: red;
+  width: 409px;
+}
+
+#dblist_2 {
+  margin: 0 auto;
+  background-color: green;
+  width: 409px;
+}
+
 #login form {
   margin: auto;
+  margin-bottom: -16px;
   padding: 22px 22px 22px 22px;
   width: 90%;
   border-radius: 5px;
