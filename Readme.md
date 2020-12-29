@@ -1,5 +1,61 @@
 TODOLIST 5000
 
+Projekt: ToDo List 5000
+
+
+Syfte: 
+
+
+Att skapa en hemsida med enkel inloggning och möjlighet att
+
+skapa, radera och organisera listor och uppgifter. Uppgifter ska ha olika
+
+status faser som kan ändras under tidens gång.
+
+Hantering: 
+
+
+Lagrar data i form av skapade listor, inloggningsuppgifter
+
+och kategori.
+
+Funktionalitet
+
+
+
+Prioritet: 
+
+
+(a) Leverera en produkt där användare kan logga in med korrekta inloggningsuppgifter.
+
+(b) Se nuvarande listor, skapa nya och radera befintliga listor.
+
+(c) Varje lista ska ha möjlighet att ha en mängd skapade uppgifter med olika statusar. 
+Användare ska ha möjlighet att skapa, radera och ändra uppgifter inklusive status.
+
+(d) En enkel delningsfunktion där programmet skapar en unik url till en specifik lista
+som ej kräver inloggning men som inte går att ändra.
+
+(e) Om tid finns vill jag se över alternativ för att utöka säkerhet och
+möjligheten till “scaling” genom en databas, exempelvis MongoDB
+
+
+a) Enkel inloggning
+
+b) Möjlighet att skapa och radera listor
+
+c) Möjlighet att skapa, radera och ändra status på uppgifter
+
+d) Möjlighet att dela lista med unik URL
+
+e) Utöka säkerhet och “scaling” genom att implementera
+en enklare databas för hantering av användare uppgift
+
+
+
+
+
+
 
 BACKEND 
 

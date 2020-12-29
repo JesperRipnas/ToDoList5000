@@ -94,13 +94,13 @@ router.get('/lists/delete=:id', async (req, res) => {
 // SEARCH FOR ID OF LIST RECIEVED FROM FRONTEND (STORED IN URL)
 router.get('/lists/complete=:id', async (req, res) => {
     const id = req.params.id;
-    // CHANGES THE 'completed' ROW IN THE COLLECTION TO TRUE
+    // CHANGES THE 'completed' ROW IN THE COLLECTION TO true
     TodoTask.updateOne( {_id: id} , {completed: true}, function(err, result) {
         if (err) {
             console.log(err);
             res.redirect('/dashboard');
           } else {
-            console.log('MongoDB: ' + id + ' list edited');
+            console.log('MongoDB: ' + id + ' list status: completed');
             res.redirect('/dashboard');
           }
     });
@@ -109,13 +109,13 @@ router.get('/lists/complete=:id', async (req, res) => {
 // SEARCH FOR ID OF LIST RECIEVED FROM FRONTEND (STORED IN URL)
 router.get('/lists/setnew=:id', async (req, res) => {
     const id = req.params.id;
-    // CHANGES THE 'completed' ROW IN THE COLLECTION TO TRUE
+    // CHANGES THE 'completed' ROW IN THE COLLECTION TO false
     TodoTask.updateOne( {_id: id} , {completed: false}, function(err, result) {
         if (err) {
             console.log(err);
             res.redirect('/dashboard');
           } else {
-            console.log('MongoDB: ' + id + ' list edited');
+            console.log('MongoDB: ' + id + ' list status: new');
             res.redirect('/dashboard');
           }
     });
