@@ -9,7 +9,7 @@ const path = require('path');
 
 router.use(cookieParser())
 
-// POST register API
+// REGISTER API
 router.post('/register', async (req, res) => {
 
     // VALIDATE POST DATA BEFORE CREATING USER
@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// POST login API
+// LOGIN API
 router.post('/login', async (req, res) => {
     const {error} = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
         console.log('Auth: ' + req.body.email + ' logged in');
 });
 
-// POST REQUEST, RECEIVE NEW LIST FROM CLIENT
+// RECEIVE NEW LIST FROM CLIENT BY JSON
 router.post('/lists', async (req, res) => {
     const todoTask = new TodoTask({
         content: req.body.content
@@ -91,10 +91,9 @@ router.get('/lists/delete=:id', async (req, res) => {
     }
 });
 
-// SEARCH FOR ID OF LIST RECIEVED FROM FRONTEND (STORED IN URL)
+// CHANGES THE 'completed' ROW IN THE COLLECTION TO true
 router.get('/lists/complete=:id', async (req, res) => {
     const id = req.params.id;
-    // CHANGES THE 'completed' ROW IN THE COLLECTION TO true
     TodoTask.updateOne( {_id: id} , {completed: true}, function(err, result) {
         if (err) {
             console.log(err);
@@ -106,10 +105,9 @@ router.get('/lists/complete=:id', async (req, res) => {
     });
 });
 
-// SEARCH FOR ID OF LIST RECIEVED FROM FRONTEND (STORED IN URL)
+// CHANGES THE 'completed' ROW IN THE COLLECTION TO false
 router.get('/lists/setnew=:id', async (req, res) => {
     const id = req.params.id;
-    // CHANGES THE 'completed' ROW IN THE COLLECTION TO false
     TodoTask.updateOne( {_id: id} , {completed: false}, function(err, result) {
         if (err) {
             console.log(err);
@@ -121,10 +119,10 @@ router.get('/lists/setnew=:id', async (req, res) => {
     });
 });
 
-// GET REQUEST, RETURNS ALL LISTS STORED IN DB TO CLIENT(FRONTEND)
+// RETURNS ALL LISTS STORED IN DB TO CLIENT(FRONTEND)
 router.get('/lists', (req, res) => {
     TodoTask.find({}, (err, tasks) => {
-        res.json(tasks);
+    res.json(tasks);
     });
 });
 

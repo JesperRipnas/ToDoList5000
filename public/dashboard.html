@@ -7,22 +7,23 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
-  <div id="login">
+  <ul>
+    <li style="float:left"><a class="active" href="/">ToDoList 5000</a></li>
+    <li style="float:right"><a class="active" onclick="removeCookiesAndLogout()" href="#logout">Logout</a></li>
+    <li style="float:right"><a class="active" href="/dashboard">Dashboard</a></li>
+  </ul>
+  <div id="addcontainer">
     <form id="form-add-activity" action="#" method="POST">
     <input type="text" name="content" placeholder="add activity...">
     <input type="submit" value="Add">
-    <br>
-    <br>
-    <input type="logout" value="Logout" id="logout" onclick="removeCookiesAndLogout()" />
     </form>
   </div>
-  <br>
   <div id="completedLists">
-    <h1>New tasks</h1>
+    <h1>Tasks</h1>
     <h2><div id="dblist"></div></h2>
     <br>
     <br>
-    <h1>Completed tasks</h1>
+    <h1>Completed</h1>
     <h2><div id="dblist_2"></div></h2>
     </div>
 <script>
