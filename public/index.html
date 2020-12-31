@@ -15,35 +15,31 @@
     <form id="loginform" action="#" method="post">
       <span class="fontawesome-user"></span>
       <input type="text" id="email" name="email" placeholder="Email" value="demo@rippan.se">
-     
       <span class="fontawesome-lock"></span>
       <input type="password" id="password" name="password" placeholder="Password" value="demo">
-      
       <input type="submit" value="Sign in" class="btn btn-primary btn-block" onclick="pageRedirect()" />
-
       <p><a href="signup">Create new account</a> 
       <br>
       <a href="reset">Reset password</a></p>
       </form>
       </div>
-      <div id="errorLogin"></div>
-
 <script>
-        (function() {
-	      function toJSONString( form ) {
-        var xhr = new XMLHttpRequest();
-        var url = "/api/user/login";
-		    var obj = {};
-        var elements = form.querySelectorAll( "input" );
+    (function() {
+	    function toJSONString( form ) {
+      var xhr = new XMLHttpRequest();
+      var url = "/api/user/login";
+		  var obj = {};
+      var elements = form.querySelectorAll( "input" );
         
-		    for( var i = 0; i < elements.length; ++i ) {
-			    var element = elements[i];
-			    var name = element.name;
-          var value = element.value;
-		  	  if( name ) {
-				    obj[ name ] = value;
-		  	  };
-        };
+		  for( var i = 0; i < elements.length; ++i ) {
+			  var element = elements[i];
+			  var name = element.name;
+        var value = element.value;
+		  	if( name ) {
+				  obj[ name ] = value;
+		    };
+    };
+
     var xmlhttp = new XMLHttpRequest();
     var theUrl = "/api/user/login";
     xmlhttp.open("POST", theUrl);

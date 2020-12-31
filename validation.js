@@ -1,7 +1,7 @@
 // VALIDATION
 const Joi = require('@hapi/joi');
 
-//Register validation
+// REGISTER VALIDATION
 const regValidation = (data) => {
     const schema = Joi.object({ 
         name: Joi.string() 
@@ -17,7 +17,7 @@ const regValidation = (data) => {
     });
     return schema.validate(data);
 };
-
+// LOGIN VALIDATION
 const loginValidation = (data) => {
     const schema = Joi.object({ 
         email: Joi.string() 

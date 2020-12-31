@@ -49,23 +49,22 @@ app.all('*', function(req, res) {
     res.redirect('/')
 });
 
-// Verify Token
+// VERIFY TOKEN
 function verifyToken(req, res, next) {
-    
-    // Check if token is undefined or not
+    // CHECK IF TOKEN IS UNDEFINED/NULL
     let tokenCookie = req.cookies['authorization'];
     let key = process.env.TOKEN_SECRET; 
     if(tokenCookie !== null){
         jwt.verify(tokenCookie, key, (err) => {
             if(err) {
-                // Forbidden
+                // FORBIDDEN, NO ACCESS WITHOUT TOKEN IN COOKIES
                 console.log('Server: 403 Access denied');
                 return res.status(403).redirect('/');
             }
             return next();
         });
     } else {
-        // Forbidden
+        // FORBIDDEN, NO ACCESS WITHOUT TOKEN IN COOKIES
         console.log('Server: 403 Access denied');
         return res.status(403).redirect('/');
     }
@@ -77,7 +76,7 @@ function removeCookie(req, res) {
     console.log('Auth: Token removed');
 };
 
-// Host server at port 8080
+// HOST SERVER ON LOCALHOST:8080
 app.listen(8080, () => console.log('Server: Running at http://localhost:8080'));
 
 

@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const { regValidation, loginValidation } = require('../validation');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser')
-const path = require('path');
 
 router.use(cookieParser())
 
@@ -91,35 +90,35 @@ router.get('/lists/delete=:id', async (req, res) => {
     }
 });
 
-// CHANGES THE 'completed' ROW IN THE COLLECTION TO true
+// CHANGES THE 'completed' VALUE FOR THE ID IN COLLECTIONS TO true
 router.get('/lists/complete=:id', async (req, res) => {
     const id = req.params.id;
     TodoTask.updateOne( {_id: id} , {completed: true}, function(err, result) {
         if (err) {
             console.log(err);
             res.redirect('/dashboard');
-          } else {
+          }else {
             console.log('MongoDB: ' + id + ' list status: completed');
             res.redirect('/dashboard');
           }
     });
 });
 
-// CHANGES THE 'completed' ROW IN THE COLLECTION TO false
+// CHANGES THE 'completed' VALUE FOR THE ID IN COLLECTIONS TO false
 router.get('/lists/setnew=:id', async (req, res) => {
     const id = req.params.id;
     TodoTask.updateOne( {_id: id} , {completed: false}, function(err, result) {
         if (err) {
             console.log(err);
             res.redirect('/dashboard');
-          } else {
+          }else {
             console.log('MongoDB: ' + id + ' list status: new');
             res.redirect('/dashboard');
           }
     });
 });
 
-// RETURNS ALL LISTS STORED IN DB TO CLIENT(FRONTEND)
+// RETURNS ALL LISTS STORED IN DB TO CLIENT
 router.get('/lists', (req, res) => {
     TodoTask.find({}, (err, tasks) => {
     res.json(tasks);

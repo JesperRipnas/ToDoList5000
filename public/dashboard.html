@@ -8,7 +8,6 @@
 </head>
 <body>
   <ul>
-    <li style="float:left"><a class="active" href="/">ToDoList 5000</a></li>
     <li style="float:right"><a class="active" onclick="removeCookiesAndLogout()" href="#logout">Logout</a></li>
     <li style="float:right"><a class="active" href="/dashboard">Dashboard</a></li>
   </ul>
@@ -42,6 +41,7 @@
 				    obj[ name ] = value;
 		  	  };
         };
+
     var xmlhttp = new XMLHttpRequest();
     var theUrl = "/api/user/lists";
     xmlhttp.open("POST", theUrl);
@@ -49,6 +49,7 @@
     xmlhttp.send(JSON.stringify( obj ));
     pageRedirect();
     return JSON.stringify( obj );
+
 	};
 	document.addEventListener( "DOMContentLoaded", function() {
 		var form = document.getElementById( "form-add-activity" );
@@ -60,7 +61,7 @@
 	});
 })();
 
-// Fetch data from database to display lists
+// FETCH DATA FOR ALL LISTS IN DATABASE TO DISPLAY ON PAGE
 fetch('/api/user/lists')
   .then(function (response) {
     return response.json();
@@ -72,30 +73,25 @@ fetch('/api/user/lists')
     console.log(err);
   });
 
-// Loop the list and write each list item from the API to the HTML page
+// LOOP THE ARRAY (LISTS) AND WRITE OUT EACH LIST ITEM ON THE PAGE
 function appendData(data) {
   var mainContainer = document.getElementById("dblist");
   var CompletedContainer = document.getElementById("dblist_2");
-  data.reverse(); // Reverse array so the newest shows on top
+  data.reverse(); // REVERSE THE ORDER OF THE ARRAY SO THE NEWEST APPEARS ON TOP
   for (var i = 0; i < data.length; i++) {
-    // IF THE BOOLEAN VALUE FOR THE LIST IS FALSE
+    // IF THE BOOLEAN VALUE FOR "completed" IN THE DATABASE IS false
     if (data[i].completed == false) {
     var div = document.createElement("div");
     div.innerHTML = '<div id="list">' + data[i].content + '<p>' + ' <a href="/api/user/lists/complete=' + data[i]._id + '" title="Complete">' + '<img border ="0"' + 'alt="Complete"' + 'src="img/complete.png"' + 'width="30px"' + 'height="33px">' + '</a>' + ' <a href="/api/user/lists/delete=' + data[i]._id + '" title="Delete">' + '<img border ="0"' + 'alt="Delete"' + 'src="img/trashcan.png"' + 'width="35px"' + 'height="34px">' + '</a>' + '</div>';
     mainContainer.appendChild(div);
     }
-    // IF THE BOOLEAN BALUE FOR THE LIST IS TRUE
+    // IF THE BOOLEAN VALUE FOR "completed" IN THE DATABASE IS true
     else {
     var div = document.createElement("div");
     div.innerHTML = '<div id="list">' + data[i].content + '<p>' + ' <a href="/api/user/lists/setnew=' + data[i]._id + '" title="Set to new">' + '<img border ="0"' + 'alt="New"' + 'src="img/new.png"' + 'width="30px"' + 'height="33px">' + '</a>' + ' <a href="/api/user/lists/delete=' + data[i]._id + '" title="Delete">' + '<img border ="0"' + 'alt="Delete"' + 'src="img/trashcan.png"' + 'width="35px"' + 'height="34px">' + '</a>' + '</div>';
       CompletedContainer.appendChild(div);
     }
   }
-};
-
-// Call for API to logout user and disable cookie stored in browser
-function removeCookiesAndLogout() {
-  window.location.replace("/api/user/logout");
 };
 </script>
 </body>

@@ -30,25 +30,6 @@
       </form>
       </div>
 <script>
-        function removeForm() {
-          var sumbitBtn = document.getElementById('sumbitBtn');
-          var fontUser = document.getElementById('fontUser');
-          var fontUserTwo = document.getElementById('fontUserTwo');
-          var fontLock = document.getElementById('fontLock');
-          var formName = document.getElementById('name');
-          var formPassword = document.getElementById('password');
-          var formEmail = document.getElementById('email');
-
-          sumbitBtn.parentNode.removeChild(sumbitBtn);
-          formName.parentNode.removeChild(formName);
-          formPassword.parentNode.removeChild(formPassword);
-          formEmail.parentNode.removeChild(formEmail);
-          fontUser.parentNode.removeChild(fontUser);
-          fontUserTwo.parentNode.removeChild(fontUserTwo);
-          fontLock.parentNode.removeChild(fontLock);
-          document.getElementById("msg").innerHTML = "Account created!";
-        };
-
         (function() {
 	      function toJSONString( form ) {
         var xhr = new XMLHttpRequest();
