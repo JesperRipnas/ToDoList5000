@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const { regValidation, loginValidation } = require('../validation');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser')
+var userData;
 
 router.use(cookieParser())
 
@@ -58,9 +59,10 @@ router.post('/login', async (req, res) => {
         };
         // GENERATE LOGIN TOKEN
         const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+        userData = user._id;
         res.cookie('authorization', token).send(token);
         console.log('Auth: Token sent');
-        console.log('Auth: ' + req.body.email + ' logged in');
+        console.log('Auth: ' + req.body.email + ' logged in (id: ' + userData + ')');
 });
 
 // RECEIVE NEW LIST FROM CLIENT BY JSON
@@ -70,7 +72,7 @@ router.post('/lists', async (req, res) => {
     });
     try {
         await todoTask.save(); 
-        console.log('MongoDB: Created new list');
+        console.log('MongoDB: Created new list by id: ' + userData);
         res.redirect('/dashboard');
     } catch {
         console.log('error when creating list');
@@ -78,12 +80,12 @@ router.post('/lists', async (req, res) => {
     }
 });
 
-// SEARCH FOR ID OF LIST RECIEVED FROM FRONTEND (STORED IN URL), DELETED IT FROM DB IF IT EXISTS
+// SEARCH FOR ID OF LIST RECIEVED FROM CLIENT (STORED IN URL), DELETED IT FROM DB IF IT EXISTS
 router.get('/lists/delete=:id', async (req, res) => {
     const id = req.params.id;
     try {
         await TodoTask.findByIdAndDelete(id);
-        console.log('MongoDB: ' + id + ' list deleted');
+        console.log('MongoDB: ' + id + ' list deleted by id: ' + userData);
         res.redirect('/dashboard');
     } catch {
         res.redirect('/dashboard');
@@ -123,6 +125,12 @@ router.get('/lists', (req, res) => {
     TodoTask.find({}, (err, tasks) => {
     res.json(tasks);
     });
+});
+
+// RETURNS CURRENT AUTHENDICATED USER TO CLIENT
+router.get('/userdata', (req, res) => {
+    console.log(userData);
+    res.json(userData);
 });
 
 module.exports = router;

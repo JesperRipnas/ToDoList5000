@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Import Routes
 const authRoute = require('./routes/auth');
+const { json } = require('express');
 
 // Connect to DB
 mongoose.connect(
